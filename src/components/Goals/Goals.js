@@ -7,7 +7,10 @@ const goals=(props)=>{
         <div className={classes.Goals}>
             {props.goals.map((goal,idx)=>(
                 
-                <Goal key={goal.name+idx} name={goal.name} deleted={props.deleted.bind(this,idx)}/>
+                <Goal key={goal.name+idx}
+                 name={goal.name} 
+                 deleted={props.deleted.bind(this,idx)}
+                 viewed={props.goalViewed.bind(this,idx)}/>
             )
                 
                 

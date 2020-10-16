@@ -1,0 +1,18 @@
+.DayUnit{
+    border:1px solid grey;
+    position:relative;
+    width:100px;
+
+    
+}
+
+.Number{
+    border-bottom:1px solid grey;
+    padding:5px;
+}
+
+.DayField{
+    padding:20px;
+    height:50px;
+    
+}
