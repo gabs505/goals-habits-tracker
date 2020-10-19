@@ -16,9 +16,11 @@ const timeline=props=>(
                     break;
             }
             return <DayUnit 
+            day={day}
             status={status}
             key={idx} 
             number={idx+1}
+            startDate={props.startDate}
             statusClick={props.dayStatusClick}
             statusClicked={props.dayStatusClicked}
             statusChanged={props.statusChanged}

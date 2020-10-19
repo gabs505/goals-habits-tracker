@@ -11,13 +11,16 @@ class GoalsManager extends Component{
     state={
         goals:[
             {name:"Drinking water",
-            days:['d','f','f','d','f','d','f','f','d','f'],
-            dayStatusClicked:[false,false,false,false,false]},
+            days:['d','f','f','d','f','d','f','f','d','f',''],
+            dayStatusClicked:[false,false,false,false,false],
+            startDate:new Date()},
             {name:"Exercising",
-            days:['d','d','d','d','d','d','f','f','d','f'],
-            dayStatusClicked:[false,false,false,false,false]}
+            days:['d','d','d','d','d','d','f','f','d','f',''],
+            dayStatusClicked:[false,false,false,false,false],
+            startDate:new Date()}
         ],
         addingNewGoal:false,
+        numOfGoalDays:10,
         goalName:'', //name of currently added goal
         goalViewed:false,
         viewedGoalIdx:0,
@@ -38,8 +41,28 @@ class GoalsManager extends Component{
         })
     }
 
-    addNewGoalHandler=()=>{
-        const updatedGoals=[...this.state.goals,{name:this.state.goalName}]
+    closeGoalMenuHandler=()=>{
+        this.setState({
+            addingNewGoal:false
+        })
+    }
+    
+    setNumOfDaysHandler=(event)=>{
+        this.setState({
+            numOfGoalDays:Number(event.target.value)
+        })
+
+        console.log(this.state.numOfGoalDays)
+    }
+    addNewGoalHandler=(numOfDays)=>{
+        
+        const days=Array(this.state.numOfGoalDays).fill('');
+        console.log(days);
+        const updatedGoals=[...this.state.goals,
+            {name:this.state.goalName,
+            days:days,
+            dayStatusClicked:Array(this.state.numOfGoalDays).fill(false),
+            startDate:new Date()}]
         this.setState({
             
             addingNewGoal:false,
@@ -62,6 +85,12 @@ class GoalsManager extends Component{
 
     }
 
+    closeGoalViewHandler=()=>{
+        this.setState({
+            goalViewed:false
+        })
+    }
+
     dayStatusClickedHandler=(dayIdx)=>{
         const dayStatusClicked=[...this.state.goals[this.state.viewedGoalIdx].dayStatusClicked]
         dayStatusClicked[dayIdx]=true;
@@ -72,16 +101,27 @@ class GoalsManager extends Component{
         })
     }
 
-    changeDayStatusHandler=(dayIdx,status)=>{
+    changeDayStatusHandler=(dayIdx,day)=>{
         
+        let currentDay;
+        console.log(day)
+        if(day==='d')
+            currentDay='f';
+        else if(day==='f'||day==='')
+            currentDay='d';
+        console.log(currentDay)
+        console.log(dayIdx)
+
         const goals=[...this.state.goals];
-        goals[this.state.viewedGoalIdx].days[dayIdx]=status;
+        goals[this.state.viewedGoalIdx].days[dayIdx]=currentDay;
         goals[this.state.viewedGoalIdx].dayStatusClicked[dayIdx]=false;
         this.setState({
             goals:goals
         })
-
+        
     }
+
+    
 
 
     
@@ -89,12 +129,16 @@ class GoalsManager extends Component{
 
 
     render=()=>{
-        const goalMenu=this.state.addingNewGoal ? (<Modal>
-                <AddGoalMenu added={this.addNewGoalHandler} inputChanged={this.getNewGoalNameHandler}></AddGoalMenu>
+        const addGoalMenu=this.state.addingNewGoal ? (<Modal backdropClicked={this.closeGoalMenuHandler}>
+                <AddGoalMenu added={this.addNewGoalHandler} 
+                inputChanged={this.getNewGoalNameHandler}
+                numOfDaysChecked={this.setNumOfDaysHandler}
+                ></AddGoalMenu>
             </Modal>) : null;
         const goalView=this.state.goalViewed ? (
-            <Modal>
+            <Modal backdropClicked={this.closeGoalViewHandler}>
                 <GoalTracker name={this.state.goals[this.state.viewedGoalIdx].name}
+                startDate={this.state.goals[this.state.viewedGoalIdx].startDate}
                 statusChanged={this.changeDayStatusHandler}  
                 days={this.state.goals[this.state.viewedGoalIdx].days}
                 dayStatusClick={this.dayStatusClickedHandler}
@@ -103,7 +147,7 @@ class GoalsManager extends Component{
             </Modal>) : null;
         return(
         <Auxiliary>
-            {goalMenu}
+            {addGoalMenu}
             {goalView}
             <div className={classes.GoalsManager}>
             <h1>My goals</h1>
