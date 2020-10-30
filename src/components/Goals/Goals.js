@@ -1,21 +1,24 @@
 import React from 'react'
+
 import Goal from './Goal/Goal'
 import classes from './Goals.module.css'
 
 const goals=(props)=>{
     return(
         <div className={classes.Goals}>
-            {props.goals.map((goal,idx)=>(
+            {props.goals.map((goal,idx)=>{
                 
-                <Goal key={goal.name+idx}
+                return(
+                <Goal key={idx}
+                id={goal.id}
                  name={goal.name} 
-                 deleted={props.deleted.bind(this,idx)}
+                 deleted={props.deleted.bind(this,idx,goal.id)}
                  viewed={props.goalViewed.bind(this,idx)}/>
             )
                 
                 
-            )}
-            <button onClick={props.clicked}>Add new goal</button>
+                })}
+            <button style={{fontFamily: "inherit"}}onClick={props.clicked}>Add new goal</button>
         </div>
         
     )

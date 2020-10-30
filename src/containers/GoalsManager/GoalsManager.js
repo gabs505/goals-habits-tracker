@@ -1,25 +1,31 @@
 import React , {Component} from 'react'
+import {Route, Switch} from 'react-router-dom'
+import axios from 'axios'
+
 import Goals from '../../components/Goals/Goals'
 import classes from './GoalsManager.module.css'
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import Modal from '../../components/UI/Modal/Modal'
 import AddGoalMenu from '../../components/Goals/AddGoalMenu/AddGoalMenu'
-import GoalTracker from '../../components/Goals/GoalTracker/GoalTracker'
+import GoalTracker from '../GoalTracker/GoalTracker'
+
+// goals:[
+//     // {name:"Drinking water",
+//     // days:['d','f','f','d','f','d','f','f','d','f',''],
+//     // dayStatusClicked:[false,false,false,false,false],
+//     // startDate:new Date()},
+//     // {name:"Exercising",
+//     // days:['d','d','d','d','d','d','f','f','d','f',''],
+//     // dayStatusClicked:[false,false,false,false,false],
+//     // startDate:new Date()}
+// ]
 
 class GoalsManager extends Component{
 
     state={
-        goals:[
-            {name:"Drinking water",
-            days:['d','f','f','d','f','d','f','f','d','f',''],
-            dayStatusClicked:[false,false,false,false,false],
-            startDate:new Date()},
-            {name:"Exercising",
-            days:['d','d','d','d','d','d','f','f','d','f',''],
-            dayStatusClicked:[false,false,false,false,false],
-            startDate:new Date()}
-        ],
+        goals:[],
         addingNewGoal:false,
+        goalDescription:'Default description',
         numOfGoalDays:10,
         goalName:'', //name of currently added goal
         goalViewed:false,
@@ -27,12 +33,47 @@ class GoalsManager extends Component{
         
     }
 
-    deleteGoalHandler=(idx)=>{
-        const updatedGoals=[...this.state.goals];
-        updatedGoals.splice(idx,1);
+    getGoalsHandler=()=>{
+        
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:5000/exercises/')
+      .then(response => {
+          const currentGoals=response.data.map(goal=>{
+              const newGoal={};
+              newGoal.name=goal.name;
+              newGoal.description=goal.description;
+              newGoal.progress=goal.progress;
+              newGoal.duration=goal.duration;
+              newGoal.dayStatusClicked=Array(goal.duration).fill(false);
+              newGoal.startDate = new Date();
+              newGoal.id = goal._id;
+              return newGoal;
+          })
         this.setState({
-            goals:updatedGoals
+            goals:currentGoals
         })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+
+    
+    deleteGoalHandler=(idx, id)=>{
+        console.log(id);
+        const updatedGoals=[...this.state.goals];
+        axios.delete('http://localhost:5000/exercises/'+id)
+            .then(res => {
+                console.log(res.data)
+                updatedGoals.splice(idx,1);
+                this.setState({
+                    goals:updatedGoals
+                })
+            });
+
+        
     }
 
     openGoalMenuHandler=()=>{
@@ -47,27 +88,72 @@ class GoalsManager extends Component{
         })
     }
     
+    getGoalDescriptionHandler=(event)=>{
+        this.setState({
+            goalDescription:event.target.value
+        })
+    }
+
     setNumOfDaysHandler=(event)=>{
         this.setState({
             numOfGoalDays:Number(event.target.value)
         })
 
-        console.log(this.state.numOfGoalDays)
     }
-    addNewGoalHandler=(numOfDays)=>{
-        
+
+    addNewGoalHandler=()=>{
         const days=Array(this.state.numOfGoalDays).fill('');
-        console.log(days);
-        const updatedGoals=[...this.state.goals,
+        const goal=
             {name:this.state.goalName,
-            days:days,
-            dayStatusClicked:Array(this.state.numOfGoalDays).fill(false),
-            startDate:new Date()}]
-        this.setState({
+            description:this.state.goalDescription,
+            duration:this.state.numOfGoalDays,
+            progress:Array(this.state.numOfGoalDays).fill('')}
+        
+        axios.post('http://localhost:5000/exercises/add', goal)
+            .then(res => {
+                console.log(res.data)
+                axios.get('http://localhost:5000/exercises/')
+            .then(response => {
+                const currentGoals=response.data.map(goal=>{
+                    const newGoal={};
+                    newGoal.name=goal.name;
+                    newGoal.description=goal.description;
+                    newGoal.progress=goal.progress;
+                    newGoal.duration=goal.duration;
+                    newGoal.dayStatusClicked=Array(goal.duration).fill(false);
+                    newGoal.startDate = new Date();
+                    newGoal.id = goal._id;
+                    return newGoal;
+                })
+              this.setState({
+                  goals:currentGoals,
+                  addingNewGoal:false
+              })
+            })
+            .catch((error) => {
+              console.log(error);
+            })});
+
             
-            addingNewGoal:false,
-            goals:updatedGoals
-        })
+
+        // this.setState({
+            
+        //     addingNewGoal:false
+        // })
+
+        
+    }
+
+    updateGoalHandler=(id)=>{
+        console.log(id);
+        const goal=this.state.goals[this.state.viewedGoalIdx];
+        const updatedGoal={};
+        updatedGoal.name=goal.name;
+        updatedGoal.description=goal.description;
+        updatedGoal.duration=goal.duration;
+        updatedGoal.progress=goal.progress;
+        axios.post('http://localhost:5000/exercises/update/'+id, updatedGoal)
+            .then(res => console.log(res.data));
     }
 
     getNewGoalNameHandler=(event)=>{
@@ -104,16 +190,15 @@ class GoalsManager extends Component{
     changeDayStatusHandler=(dayIdx,day)=>{
         
         let currentDay;
-        console.log(day)
+        
         if(day==='d')
             currentDay='f';
         else if(day==='f'||day==='')
             currentDay='d';
-        console.log(currentDay)
-        console.log(dayIdx)
+        
 
         const goals=[...this.state.goals];
-        goals[this.state.viewedGoalIdx].days[dayIdx]=currentDay;
+        goals[this.state.viewedGoalIdx].progress[dayIdx]=currentDay;
         goals[this.state.viewedGoalIdx].dayStatusClicked[dayIdx]=false;
         this.setState({
             goals:goals
@@ -121,42 +206,57 @@ class GoalsManager extends Component{
         
     }
 
-    
-
-
-    
-            
+        
 
 
     render=()=>{
         const addGoalMenu=this.state.addingNewGoal ? (<Modal backdropClicked={this.closeGoalMenuHandler}>
                 <AddGoalMenu added={this.addNewGoalHandler} 
                 inputChanged={this.getNewGoalNameHandler}
+                descriptionHandler={this.getGoalDescriptionHandler}
                 numOfDaysChecked={this.setNumOfDaysHandler}
+                
                 ></AddGoalMenu>
             </Modal>) : null;
-        const goalView=this.state.goalViewed ? (
-            <Modal backdropClicked={this.closeGoalViewHandler}>
-                <GoalTracker name={this.state.goals[this.state.viewedGoalIdx].name}
-                startDate={this.state.goals[this.state.viewedGoalIdx].startDate}
-                statusChanged={this.changeDayStatusHandler}  
-                days={this.state.goals[this.state.viewedGoalIdx].days}
+        
+        let goalView=null;
+        let goalsManager=null;
+        if(this.state.goals.length){
+            goalView=(
+            
+                <GoalTracker goal={this.state.goals[this.state.viewedGoalIdx]}
+                
+                statusChanged={this.changeDayStatusHandler} 
                 dayStatusClick={this.dayStatusClickedHandler}
                 dayStatusClicked={this.state.goals[this.state.viewedGoalIdx].dayStatusClicked}
-                  />
-            </Modal>) : null;
+                submitGoalUpdate={this.updateGoalHandler}
+                />
+            )
+            goalsManager=(
+            <Auxiliary>
+                {addGoalMenu}
+            
+                <div className={classes.GoalsManager}>
+                <h1>My goals</h1>
+                <Goals goals={this.state.goals} 
+                deleted={this.deleteGoalHandler} 
+                clicked={this.openGoalMenuHandler} 
+                goalViewed={this.viewGoalHandler}
+                />
+                </div>
+            </Auxiliary>
+            
+        )
+        }
+        
         return(
         <Auxiliary>
-            {addGoalMenu}
-            {goalView}
-            <div className={classes.GoalsManager}>
-            <h1>My goals</h1>
-            <Goals goals={this.state.goals} 
-            deleted={this.deleteGoalHandler} 
-            clicked={this.openGoalMenuHandler} 
-            goalViewed={this.viewGoalHandler}
-            />
-        </div>
+            <Switch>
+                <Route path="/goals/:id" render={()=>goalView}/>
+                <Route path="/"  render={()=>goalsManager}/>
+                
+            </Switch>
+            
         </Auxiliary>
         )
         

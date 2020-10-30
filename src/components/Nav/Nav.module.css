@@ -1,0 +1,28 @@
+.Nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:rgb(92, 92, 92);
+    color:white;
+
+}
+
+.Nav ul{
+    display:flex;
+    justify-content:center;
+    list-style:none;
+    width:70%;
+    margin:0 auto;
+    padding-inline-start:0;
+}
+
+.NavItem{
+    padding:5px;
+    margin:0 15px;
+}
+
+.NavItem a{
+    text-decoration:none;
+    color:white;
+}

@@ -4,5 +4,7 @@
     flex-wrap:wrap;
     overflow-y:auto;
     margin:0 auto;
-    height:50vh;
+    min-height:200px;
+    height:40vh;
+    align-items:flex-start;
 }
