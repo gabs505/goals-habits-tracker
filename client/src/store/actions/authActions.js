@@ -27,7 +27,7 @@ export const loadUser=()=>(dispatch,getState)=>{
 
     const config=tokenConfig(getState);
 
-    axios.get('auth/user',config)
+    axios.get('https://intense-fjord-56282.herokuapp.com/auth/user',config)
     .then(res=>{
         dispatch({
             type:USER_LOADED,
@@ -51,7 +51,7 @@ export const registerUser=({name,email,password})=>dispatch=>{
         password
     }
 
-    axios.post('http://localhost:5000/users/add',body)
+    axios.post('https://intense-fjord-56282.herokuapp.com/users/add',body)
     .then(res=>{
         dispatch({
             type:REGISTER_SUCCESS,
@@ -76,7 +76,7 @@ export const loginUser=({email,password})=>dispatch=>{
         password
     }
 
-    axios.post('http://localhost:5000/auth/',body)
+    axios.post('https://intense-fjord-56282.herokuapp.com/auth/',body)
     .then(res=>{
         dispatch({
             type:LOGIN_SUCCESS,
