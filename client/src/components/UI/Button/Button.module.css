@@ -1,0 +1,28 @@
+.Button{
+    padding:5px;
+    border-radius: 10px;
+    background-color:rgb(182, 183, 238);
+    border:1px solid rgb(108, 109, 141);
+    width:200px;
+    margin:5px auto;
+    box-sizing:border-box;
+}
+
+.Button:hover{
+    cursor:pointer;
+    opacity:0.8;
+}
+
+.Success{
+    display:inline-block;
+    
+    background-color: rgb(206, 243, 184);
+    
+}
+
+.Danger{
+    display:inline-block;
+    
+    background-color: rgb(235, 161, 161);
+    
+}

@@ -1,0 +1,35 @@
+.DayUnit{
+    border:1px solid white;
+    position:relative;
+    width:120px;
+    flex-shrink:0;
+    flex-grow:0;
+    margin:10px 0;
+    max-height:150px;
+    
+    
+
+    
+}
+
+.Number{
+    padding:5px;
+    background-color: #878787;
+    color:White;
+}
+
+.DayField{
+    padding:20px;
+    min-height:60px;
+    background-color: #E3DCDC;
+    margin:0;
+    
+}
+
+.Disabled{
+    background-color: #c2bdbd;
+}
+
+.Disabled:hover{
+    cursor:not-allowed;
+}

@@ -1,0 +1,48 @@
+.Nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background-color:rgb(92, 92, 92);
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    
+
+}
+
+.Nav ul{
+    display:flex;
+    justify-content:flex-start;
+    list-style:none;
+    width:50%;
+    padding-inline-start:0;
+    height:100%;
+    box-sizing:border-box;
+    margin:0;
+}
+
+.NavItem{
+    display:inline-block;
+    padding:5px;
+    margin:0 15px;
+    
+}
+
+.NavItem a, .AuthField a{
+    text-decoration:none;
+    color:white;
+}
+
+
+
+.Auth{
+    margin-right:10px;
+}
+
+.AuthField{
+    display:inline-block;
+    padding:5px;
+    margin:0 10px;
+    color:rgb(227, 228, 187);
+}

@@ -1,0 +1,11 @@
+.Timeline{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    overflow-y:auto;
+    margin:0 auto;
+    min-height:200px;
+    height:40vh;
+    align-items:flex-start;
+    /* justify-content: center; */
+}

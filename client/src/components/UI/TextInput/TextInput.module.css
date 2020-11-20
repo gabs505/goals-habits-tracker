@@ -1,0 +1,10 @@
+.TextInput{
+    display:block;
+    background-color:rgb(208, 233, 230);
+    border:0;
+    border-bottom:2px solid rgb(87, 145, 179);
+    outline:none;
+    width:100%;
+    font-family: "inherit";
+    margin:10px 0;
+}
