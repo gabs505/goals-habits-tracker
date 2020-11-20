@@ -1,10 +1,10 @@
 import {DELETE_GOAL,ADD_GOAL,UPDATE_GOAL, INIT_GOALS} from './actionTypes'
-import axios from 'axios'
+import axios from '../../axios/axios'
 import {tokenConfig} from '../actions/authActions'
 
 
 export const deleteGoal=(id)=>(dispatch,getState)=>{
-    axios.delete('http://localhost:5000/goals/'+id,tokenConfig(getState))
+    axios.delete('goals/'+id,tokenConfig(getState))
             .then(res => {
                 
             })
@@ -20,7 +20,7 @@ export const deleteGoal=(id)=>(dispatch,getState)=>{
 
 export const addGoal=(goal)=>{
     return (dispatch,getState)=>{
-        axios.post('http://localhost:5000/goals/add', goal, tokenConfig(getState))
+        axios.post('goals/add', goal, tokenConfig(getState))
             .then(res => {
                 // dispatch({
                 //     type:ADD_GOAL,
@@ -45,7 +45,7 @@ export const updateGoal=(goalId,dayIdx,value)=>{
 export const setGoals=(userId)=>{
     return (dispatch,getState)=>{
         
-        axios.get('http://localhost:5000/goals/')
+        axios.get('goals/')
       .then(response => {
         
         // console.log(response.data)

@@ -8,7 +8,7 @@ import Button from '../../components/UI/Button/Button'
 import ShowDiv from '../../components/UI/ShowDiv/ShowDiv'
 
 import classes from './GoalTracker.module.css'
-import axios from 'axios'
+import axios from '../../axios/axios'
 
 import {updateGoal} from '../../store/actions/actions'
 
@@ -29,7 +29,7 @@ class GoalTracker extends Component{
         updatedGoal.progress=goal.progress;
         updatedGoal.startDate=goal.startDate;
         
-        axios.post('http://localhost:5000/goals/update/'+id, updatedGoal)
+        axios.post('goals/update/'+id, updatedGoal)
             .then(res => {});
     }
         

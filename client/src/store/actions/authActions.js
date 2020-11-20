@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../axios/axios'
 import {USER_LOADING,USER_LOADED, AUTH_ERROR
 ,REGISTER_SUCCESS,REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS} from '../actions/actionTypes'
 import {returnErrors} from './errorActions'
@@ -27,7 +27,7 @@ export const loadUser=()=>(dispatch,getState)=>{
 
     const config=tokenConfig(getState);
 
-    axios.get('https://intense-fjord-56282.herokuapp.com/auth/user',config)
+    axios.get('auth/user',config)
     .then(res=>{
         dispatch({
             type:USER_LOADED,
@@ -51,7 +51,7 @@ export const registerUser=({name,email,password})=>dispatch=>{
         password
     }
 
-    axios.post('https://intense-fjord-56282.herokuapp.com/users/add',body)
+    axios.post('users/add',body)
     .then(res=>{
         dispatch({
             type:REGISTER_SUCCESS,
@@ -76,7 +76,7 @@ export const loginUser=({email,password})=>dispatch=>{
         password
     }
 
-    axios.post('https://intense-fjord-56282.herokuapp.com/auth/',body)
+    axios.post('auth/',body)
     .then(res=>{
         dispatch({
             type:LOGIN_SUCCESS,
