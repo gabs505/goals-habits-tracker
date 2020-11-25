@@ -1,31 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import classes from './Nav.module.css'
 
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
+import BurgerMenu from './BurgerMenu/BurgerMenu'
 
 import {logout} from '../../store/actions/authActions'
 
-const nav=(props)=>(
+const Nav=(props)=>{
+    const [isSideNavActive,setIsSideNavActive]=useState(false)
+    return(
     <div className={classes.Nav}>
-        <ul>
-            <li className={classes.NavItem}><Link to="/goals">My Goals</Link></li>
-            <li className={classes.NavItem}><Link to="/overview">Overview</Link></li>
-            {/* <li className={classes.NavItem}><Link to="/login">Log In</Link></li> */}
-            
-        </ul>
+        <BurgerMenu clicked={()=>setIsSideNavActive(!isSideNavActive)} active={isSideNavActive} />
         
-            {props.isAuthenticated ? <div className={classes.Auth}>
-                <span className={classes.AuthField}>{props.currentUser? `Hello ${props.currentUser.name}!`:null}</span>
-                <span className={classes.AuthField} onClick={props.logoutHandler}><Link to="/login">Log Out</Link></span>
-            </div>: <span className={classes.AuthField}><Link to="/login">Log In</Link></span>}
+            <ul className={isSideNavActive?[classes.NavContent]:[classes.NavContent,classes.hidden].join(' ')}>
+                <li onClick={()=>setIsSideNavActive(false)} className={classes.NavItem}><Link to="/goals">Goals</Link></li>
+                <li onClick={()=>setIsSideNavActive(false)} className={classes.NavItem}><Link to="/overview">Overview</Link></li>
+                {props.isAuthenticated ?
+                    <li className={classes.NavItem} onClick={()=>{props.logoutHandler();setIsSideNavActive(false)}}><Link to="/login">Log Out</Link></li>
+                    : <li className={classes.NavItem} onClick={()=>setIsSideNavActive(false)}><Link to="/login">Log In</Link></li>
+                }
+                
+            </ul>
+            
+                { props.currentUser ? <span className={classes.HelloItem}>{`Hello ${props.currentUser.name}!`}</span> : null}
+                   
+        
+        
             
         
         
 
     </div>
 )
+    }
 
 const mapStateToProps=state=>{
     return{
@@ -40,5 +49,5 @@ const mapDispatchToProps=dispatch=>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(nav);
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
 // export default nav;

@@ -8,10 +8,10 @@
     display:flex;
     justify-content:space-between;
     
-
 }
 
-.Nav ul{
+
+.NavContent{
     display:flex;
     justify-content:flex-start;
     list-style:none;
@@ -23,6 +23,13 @@
 }
 
 .NavItem{
+    display:inline-block;
+    padding:5px;
+    margin:0 15px;
+    
+}
+
+.HelloItem{
     display:inline-block;
     padding:5px;
     margin:0 15px;
@@ -45,4 +52,50 @@
     padding:5px;
     margin:0 10px;
     color:rgb(227, 228, 187);
+}
+
+
+
+@media only screen and (max-width:600px){
+    .Nav{
+        
+        display:block;
+        justify-content:space-between;
+        height:60px;
+    }
+    .NavContent{
+        display:block;
+        width:200px;
+        height:100vh;
+        box-sizing:border-box;
+        margin:0;
+        position:fixed;
+        top:0;
+        left:0;
+        
+        background-color:rgb(71, 71, 92);
+        padding-top:100px;
+        transition:transform 0.5s;
+    }
+
+    .NavItem{
+        display:block;
+        padding:5px;
+        margin:0 15px;
+        
+    }
+
+    .hidden{
+        transform:translateX(-100%);
+    } 
+
+    .HelloItem{
+        display:inline-block;
+        padding:5px;
+        margin:0 15px;
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        
+    }
 }

@@ -6,6 +6,9 @@
     margin:0 auto;
     min-height:200px;
     height:40vh;
-    align-items:flex-start;
-    /* justify-content: center; */
+    align-items:center;
+    justify-content:center;
+    background-color: rgb(58, 60, 61);
+    border-radius:20px;
+    padding:5px;
 }

@@ -1,0 +1,74 @@
+.BurgerButton{
+    display:none;
+    top:0;
+    left:0;
+    padding:30px;
+    background-color: transparent;
+    position:fixed;
+    transition:transform 0.7s;
+    outline:none;
+    border:none;
+    z-index:200;
+}
+
+.BurgerButton:hover{
+    cursor:pointer;
+}
+
+.BurgerInner{
+    
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    left:50%;
+    transform:translateX(-50%);
+    width:30px;
+    height:3px;
+    background-color: white;
+
+}
+
+.BurgerInner::before,.BurgerInner::after{
+    content:'';
+    position:absolute;
+    width:30px;
+    height:3px;
+    background-color: white;
+    top:0;
+    left:0;
+
+}
+
+.BurgerInner::before{
+    transform:translateY(-10px);
+}
+
+.BurgerInner::after{
+    transform:translateY(10px);
+}
+
+.BurgerButton.active{
+    transform:translateX(140px);
+}
+
+.active .BurgerInner{
+    background-color: transparent;
+}
+
+.active .BurgerInner::before, .active .BurgerInner::after{
+    transition:transform 0.2s;
+}
+.active .BurgerInner::before{
+    transform: rotate(45deg);
+}
+
+.active .BurgerInner::after{
+    transform: rotate(-45deg);
+}
+
+@media only screen and (max-width:600px){
+    .BurgerButton{
+        display:inline-block;
+    }
+    
+}

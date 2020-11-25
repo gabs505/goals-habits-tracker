@@ -1,6 +1,7 @@
 .Login{
     width:70%;
     height:80%;
+    max-height:600px;
     background-color:#f3eaea;
     border-radius: 20px;
 }
@@ -20,20 +21,11 @@
     justify-self:flex-start;
 }
 
-h1{
+.Login h1{
     color:black;
     justify-self:flex-start;
 }
 
-.ChooseRegister{
-    width:200px;
-    text-align:center;
-    margin:0 auto;
-}
-.ChooseRegister:hover{
-    cursor:pointer;
-    
-}
 
 .Error{
     width:100%;
@@ -42,4 +34,18 @@ h1{
     border-radius:10px;
     padding:5px;
 
+}
+
+@media only screen and (max-width:420px){
+    .Login h1{
+        font-size:1.5rem;
+    }
+    .Error{
+        width:100%;
+        background-color: #d6a4a4;
+        margin:20px auto;
+        border-radius:10px;
+        padding:5px;
+    
+    }
 }

@@ -5,11 +5,7 @@
     flex-shrink:0;
     flex-grow:0;
     margin:10px 0;
-    max-height:150px;
-    
-    
-
-    
+    max-height:150px; 
 }
 
 .Number{
@@ -32,4 +28,16 @@
 
 .Disabled:hover{
     cursor:not-allowed;
+}
+
+@media only screen and (max-width:600px){
+    .DayUnit{
+        width:90px;
+        height:100px;
+        min-height:unset;
+    }
+
+    .DayField{
+        min-height:30px;
+    }
 }

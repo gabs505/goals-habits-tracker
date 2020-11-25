@@ -32,7 +32,8 @@ const options= {
                 beginAtZero: true
             }
         }]
-    }
+    },
+    responsive:true
 }
 
 const getNumOfDoneDays=(goals)=>{

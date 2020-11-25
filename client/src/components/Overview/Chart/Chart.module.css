@@ -1,5 +1,8 @@
 .Chart{
-    width:500px;
+    box-sizing:border-box;
+    width:80vw;
+    /* height:60vh; */
+    
     background-color:#f3eaea;
     padding:20px;
     border-radius:20px;
@@ -8,4 +11,12 @@
 
 h2{
     color:black;
+}
+
+
+@media only screen and (min-height:600px){
+    .Chart{
+        height:50vh;
+        max-height:600px;
+    }
 }
