@@ -6,7 +6,7 @@ import classes from './Check.module.css'
 
 const check=(props)=>{
     return props.tick==='' ? null : <img src={props.tick ? Tick : Ex}
-    className={classes.Check} onClick={props.changed}></img>
+    className={classes.Check} onClick={props.changed} alt=""></img>
     
     
     

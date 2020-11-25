@@ -50,7 +50,6 @@ const getNumOfFailedDays=(goals)=>{
 
 const chart = props =>{
     if(props.goals){
-        console.log(getNumOfDoneDays(props.goals))
         data.datasets[0].data=getNumOfDoneDays(props.goals)
         data.datasets[1].data=getNumOfFailedDays(props.goals)
         data.labels=props.goals.map(goal=>goal.name)

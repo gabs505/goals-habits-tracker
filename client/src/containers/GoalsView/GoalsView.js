@@ -9,7 +9,6 @@ import {connect} from 'react-redux'
 
 import {setGoals, deleteGoal} from '../../store/actions/actions'
 
-import axios from 'axios'
 
 const GoalView=props=>{
     const [deletedId,setDeletedId] = useState(null);

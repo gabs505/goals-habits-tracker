@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
-import reducer from './store/reducer'
 import goalReducer from './store/reducers/goal'
 import authReducer from './store/reducers/auth'
 import errorReducer from './store/reducers/error'

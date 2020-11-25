@@ -14,6 +14,9 @@ const timeline=props=>(
                 case 'f':
                     status=false;
                     break;
+                default:
+                    status='';
+                    break;
             }
             return <DayUnit 
             day={day}

@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import classes from './Nav.module.css'
 
-import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import BurgerMenu from './BurgerMenu/BurgerMenu'
 
 import {logout} from '../../store/actions/authActions'

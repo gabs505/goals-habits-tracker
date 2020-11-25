@@ -1,4 +1,4 @@
-import {DELETE_GOAL,ADD_GOAL,UPDATE_GOAL, INIT_GOALS} from './actionTypes'
+import {DELETE_GOAL,UPDATE_GOAL, INIT_GOALS} from './actionTypes'
 import axios from '../../axios/axios'
 import {tokenConfig} from '../actions/authActions'
 
@@ -65,7 +65,6 @@ export const setGoals=(userId)=>{
               }
               
           }).filter(goal=>goal!==undefined)
-          console.log(currentGoals)
           
         dispatch({
             type:INIT_GOALS,
@@ -73,7 +72,7 @@ export const setGoals=(userId)=>{
         });
       })
       .catch((error) => {
-        console.log(error);
+        
       })
     }
 }

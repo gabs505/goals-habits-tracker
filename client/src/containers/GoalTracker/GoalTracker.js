@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import Timeline from '../../components/Goals/GoalTracker/Timeline/Timeline'
 import ProgressBar from '../../components/Goals/GoalTracker/ProgressBar/ProgressBar'
 import Button from '../../components/UI/Button/Button'
@@ -19,6 +18,7 @@ class GoalTracker extends Component{
         showDescription:false
     }
 
+
     updateGoalInDatabaseHandler=()=>{
         const id=this.props.match.params.id;
         const goal=this.props.goals.find(goal=>goal.id===id);
@@ -30,7 +30,9 @@ class GoalTracker extends Component{
         updatedGoal.startDate=goal.startDate;
         
         axios.post('goals/update/'+id, updatedGoal)
-            .then(res => {});
+            .then(res => {
+                this.props.history.push('/goals')
+            });
     }
         
     

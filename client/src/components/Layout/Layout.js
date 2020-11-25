@@ -2,7 +2,6 @@ import React , {Component} from 'react'
 import {Route, Switch, Redirect} from 'react-router-dom'
 
 import Nav from '../../components/Nav/Nav'
-import SideNav from '../../components/Nav/SideNav/SideNav'
 import GoalsView from '../../containers/GoalsView/GoalsView'
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary'
 import AddGoalMenu from '../../containers/AddGoalMenu/AddGoalMenu'

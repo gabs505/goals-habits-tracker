@@ -1,20 +1,20 @@
 import React from 'react'
 import classes from './DayUnit.module.css'
-import EditMenu from './EditMenu/EditMenu'
 import Check from './Check/Check'
 
 const calculateDateHandler=(goalDate,dayNum)=>{
     let currentDate=goalDate;
     const months=["Jan","Febr","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+    // const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
     let currentMonthDays;//number of days in current month
+    let nextMonthDays;
+
     if(currentDate.getMonth()+1<=11)
         currentMonthDays=new Date(currentDate.getFullYear(),currentDate.getMonth()+1,0).getDate();
     else
-        nextMonthDays=new Date(currentDate.getFullYear()+1,0,0).getDate();//days of december
+        currentMonthDays=new Date(currentDate.getFullYear()+1,0,0).getDate();//days of december
 
-    let nextMonthDays;
     if(currentDate.getMonth()+2<=11)
         nextMonthDays=new Date(currentDate.getFullYear(),currentDate.getMonth()+2,0).getDate();
     else
