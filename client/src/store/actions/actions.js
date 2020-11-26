@@ -1,34 +1,46 @@
-import {DELETE_GOAL,UPDATE_GOAL, INIT_GOALS} from './actionTypes'
+import {DELETE_GOAL,ADD_GOAL,UPDATE_GOAL, INIT_GOALS} from './actionTypes'
 import axios from '../../axios/axios'
 import {tokenConfig} from '../actions/authActions'
 
 
-export const deleteGoal=(id)=>(dispatch,getState)=>{
+export const deleteGoal=(id)=>(dispatch,getState)=>
+{ return new Promise((resolve,reject)=>{
     axios.delete('goals/'+id,tokenConfig(getState))
             .then(res => {
-                
+                dispatch({
+                    type:DELETE_GOAL,
+                    id:id
+                })
+                resolve(res);
+
             })
             .catch(err=>{
                 console.log(err)
-            console.log('hello')});
-    dispatch({
-        type:DELETE_GOAL,
-        id:id
-    })
+            });
+})
+     
+    
 }
+    
+    
 
 
-export const addGoal=(goal)=>{
+
+export const addGoal=(goal,history)=>{
     return (dispatch,getState)=>{
+        
         axios.post('goals/add', goal, tokenConfig(getState))
             .then(res => {
-                // dispatch({
-                //     type:ADD_GOAL,
-                //     goalSetup:goal
-                // })  
+                dispatch({
+                    type:ADD_GOAL,
+                    goalSetup:goal
+                }) 
+                 history.push('/goals')
+                
             })
             .catch(err=>console.log(err));
-    }
+    
+}
 }
 
 

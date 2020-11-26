@@ -48,9 +48,7 @@ class AddGoalMenu extends Component{
         })
 
     }
-    // componentDidMount(){
-    //     console.log(this.props)
-    // }
+    
 
     addNewGoalHandler=()=>{
         const {user}=this.props;
@@ -67,8 +65,9 @@ class AddGoalMenu extends Component{
             startDate:this.state.startDate,
             userId:userId}
         
-            this.props.addNewGoal(goal);
-            this.props.history.push('/')
+            this.props.addNewGoal(goal)
+            
+            
         
     }
 

@@ -17,11 +17,18 @@ const GoalView=props=>{
         if(props.isAuthenticated)
             props.getGoalsHandler(props.user.id);
             
+            
     
-    },[isModalActive, props.isAuthenticated])
+    },[props.goal, isModalActive])
     const deleteGoalHandler=()=>{
-        props.deleteGoalHandler(deletedId)
-        setIsModalActive(false);
+        props.deleteGoalHandler(deletedId).then(()=>{
+            setIsModalActive(false);
+        }
+
+        )
+        
+       
+        
     }
 
     const quitDeleteGoalModal=()=>{
