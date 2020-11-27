@@ -9,7 +9,7 @@ An application to help you to plan and track your goals and habits easily.
 * MongoDB
 * Mongoose
 
-![Goal progress preview](./readme_img/goal_tracker.jpg)
+![Goal progress preview](./readme_img/goal_tracker.JPG)
 
 ## Features
 - Registering and logging in (with simple validation)
