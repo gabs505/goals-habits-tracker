@@ -1,6 +1,8 @@
 # Goals and habits tracker
 An application to help you to plan and track your goals and habits easily.
 
+## Demo
+Here is a working live demo : https://intense-fjord-56282.herokuapp.com/login
 ## Used technologies
 * React
 * Redux
