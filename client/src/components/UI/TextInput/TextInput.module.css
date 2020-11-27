@@ -6,5 +6,24 @@
     outline:none;
     width:100%;
     font-family: "inherit";
-    margin:10px 0;
+    margin-top:10px;
+}
+
+.TextInput.Invalid{
+    background-color: rgb(247, 200, 199);
+    border-bottom:2px solid rgb(179, 87, 87);
+}
+
+.Label{
+    display:inline-block;
+    text-align:left;
+    width:100%;
+    justify-self:flex-start;
+}
+
+.ErrorInfo{
+    font-size:0.7rem;
+    text-align:left;
+    margin-top:0;
+    color:rgb(143, 69, 69);
 }

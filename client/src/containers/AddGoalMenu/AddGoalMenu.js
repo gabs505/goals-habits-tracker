@@ -78,7 +78,7 @@ class AddGoalMenu extends Component{
                     <h2 style={{color:"initial", margin:"auto"}}>Add new goal</h2>
                     <div className={classes.Container}>
                         <p>Enter goal name:</p>
-                        <TextInput type="text" changed={this.setGoalNameHandler} />
+                        <TextInput type="text" withLabel={false} changed={this.setGoalNameHandler} />
                     </div>
                     
                     
